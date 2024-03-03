@@ -28,7 +28,7 @@ app.post("/new-message", function(req, res) {
     if(message.text.toLowerCase() === "/start") {
         msg = "Hi there! How can I help you!"            
     }
-    else if(message.text.lowerCase() === "/owner") {
+    else if(message.text.toLowerCase() === "/owner") {
         msg = "This bot is owned by @nishant_verma"
     }
     else{
