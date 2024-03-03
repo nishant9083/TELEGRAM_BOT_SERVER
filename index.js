@@ -45,3 +45,5 @@ app.post("/new-message", function(req, res) {
 app.listen(3000, function() {
 	console.log("Telegram app listening on port 3000!")
 })
+
+module.exports = app;
