@@ -24,9 +24,15 @@ app.post("/new-message", function(req, res) {
 		// In case a message is not present, or if our message does not have the word marco in it, do nothing and return an empty response
 		return res.end()
 	}
-    let msg = "Hi there! This is a response from your bot."
-    if(message.text.lowerCase() === "/owner") {
+    let msg = ""
+    if(message.text.toLowerCase() === "/start") {
+        msg = "Hi there! How can I help you!"            
+    }
+    else if(message.text.lowerCase() === "/owner") {
         msg = "This bot is owned by @nishant_verma"
+    }
+    else{
+        msg = "What do you want me to do?"
     }
 	axios
 		.post(
