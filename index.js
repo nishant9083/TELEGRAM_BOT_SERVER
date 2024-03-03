@@ -12,6 +12,9 @@ app.use(
 ) // for parsing application/x-www-form-urlencoded
 
 //This is the route the API will call
+app.get("/", function(req, res) {
+    res.send("Welcom to Express Server!");
+});
 app.post("/new-message", function(req, res) {
 	const { message } = req.body
 
