@@ -24,12 +24,16 @@ app.post("/new-message", function(req, res) {
 		// In case a message is not present, or if our message does not have the word marco in it, do nothing and return an empty response
 		return res.end()
 	}
+    let msg = "Hi there! This is a response from your bot."
+    if(message.text.lowerCase() === "/owner") {
+        msg = "This bot is owned by @nishant_verma"
+    }
 	axios
 		.post(
 			`https://api.telegram.org/bot${process.env.BOT_API}/sendMessage`,
 			{
 				chat_id: message.chat.id,
-				text: "Hi there! This is a response from your bot.",
+				text: msg,
 			}
 		)
 		.then((response) => {
