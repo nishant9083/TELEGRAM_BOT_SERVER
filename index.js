@@ -17,7 +17,7 @@ app.post("/new-message", function(req, res) {
 
 	//Each message contains "text" and a "chat" object, which has an "id" which is the chat id
 
-	if (!message || message.text.toLowerCase().indexOf("marco") < 0) {
+	if (!message || message.text === "") {
 		// In case a message is not present, or if our message does not have the word marco in it, do nothing and return an empty response
 		return res.end()
 	}
@@ -26,12 +26,12 @@ app.post("/new-message", function(req, res) {
 			`https://api.telegram.org/bot${process.env.BOT_API}/sendMessage`,
 			{
 				chat_id: message.chat.id,
-				text: "Polo!!",
+				text: "Hi there! This is a response from your bot.",
 			}
 		)
 		.then((response) => {
 			// We get here if the message was successfully posted
-			console.log("Message posted")
+			console.log(response)
 			res.end("ok")
 		})
 		.catch((err) => {
