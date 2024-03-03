@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require("body-parser");
 const axios = require("axios");
 require("dotenv").config();
+const runChat = require("./bot_response");
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(
@@ -15,7 +16,7 @@ app.use(
 app.get("/", function(req, res) {
     res.send("Welcom to Express Server!");
 });
-app.post("/new-message", function(req, res) {
+app.post("/new-message", async function(req, res) {
 	const { message } = req.body
 
 	//Each message contains "text" and a "chat" object, which has an "id" which is the chat id
@@ -24,7 +25,7 @@ app.post("/new-message", function(req, res) {
 		// In case a message is not present, or if our message does not have the word marco in it, do nothing and return an empty response
 		return res.end()
 	}
-    let msg = ""
+    let msg = "What can I do for you?"
     if(message.text.toLowerCase() === "/start") {
         msg = "Hi there! How can I help you!"            
     }
@@ -32,7 +33,7 @@ app.post("/new-message", function(req, res) {
         msg = "This bot is owned by @nishant_verma"
     }
     else{
-        msg = "What do you want me to do?"
+        msg = await runChat(message.text);
     }
 	axios
 		.post(
